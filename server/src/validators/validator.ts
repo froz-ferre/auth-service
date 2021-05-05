@@ -14,9 +14,10 @@ export class Validator {
       return {reason: 'Data is not valid integer'};
     }
 
-    if (!Number.isInteger(data) || !Number.isFinite(data)) {
-      return {reason: 'Data is not valid number'};
-    }
+    // if (!Number.isFinite(data)) {
+    //   console.log(data)
+    //   return {reason: 'Data is not valid number'};
+    // }
 
     return null;
   }

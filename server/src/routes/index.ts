@@ -5,6 +5,7 @@ import { router as orderRouter } from './order.router';
 
 const router = express.Router();
 
+// router.use('/user', customValidator, userRouter );
 router.use('/user', userRouter);
 router.use('/products', productsRouter);
 router.use('/order', orderRouter);
