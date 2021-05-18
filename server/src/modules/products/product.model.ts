@@ -1,4 +1,4 @@
-import postgresPool from '../db/db-adapter';
+import postgresPool from '../../db/db-adapter';
 
 export interface IProduct {
   id: number;

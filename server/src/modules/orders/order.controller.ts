@@ -1,15 +1,17 @@
 import { Request, Response } from 'express';
-import { ValidationObject, Validator } from '../validators/validator';
-import { BaseView } from '../views/view';
-import { ApiError } from '../errors/api-errors';
-import { orderModel } from '../models/order.model';
+import { ValidationObject, Validator } from '../../common/validators/validator';
+import { BaseView } from '../../common/views/view';
+import { ApiError } from '../../common/errors/api-errors';
+import { orderModel } from './order.model';
+import { IProductRequestSchema } from './order.schema';
+import { ValidatedRequest } from 'express-joi-validation';
 
 
 class OrderController {
 
-  public async create(req: Request, res: Response) {
-    const { products, user } = req.body;
-    let error: ValidationObject = Validator.validateOrder(products, user);
+  public async create(req: ValidatedRequest<IProductRequestSchema>, res: Response) {
+    const { products } = req.body;
+    let error: ValidationObject = Validator.validateOrder(products);
     if (error) {
       return BaseView.buildErrorView(res, ApiError.badRequest(error.reason));
     }
@@ -22,8 +24,7 @@ class OrderController {
         return BaseView.buildErrorView(res, ApiError.badRequest(error.reason));
       }
 
-      const userResult = await orderModel.createUser(user);
-      await orderModel.create(products, userResult.id);
+      await orderModel.create(products, res.locals.user.id);
 
       return BaseView.buildSuccessView(res, []);
     } catch (e) {

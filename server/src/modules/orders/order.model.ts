@@ -1,6 +1,32 @@
-import postgresPool from '../db/db-adapter';
-import { query } from 'express';
+import postgresPool from '../../db/db-adapter';
+import { DataTypes, Model } from 'sequelize';
+import { sequelizeConnection } from '../../config/database';
 
+export class Order extends Model {
+
+}
+
+Order.init({
+  id: {
+    type: DataTypes.INTEGER,
+    allowNull: false,
+    autoIncrement: true,
+    primaryKey: true
+  },
+  created: {
+    type: DataTypes.DATE,
+    allowNull: false
+  },
+  userId: {
+    field: 'user_id',
+    type: DataTypes.INTEGER,
+    allowNull: false
+  }
+}, {
+  sequelize: sequelizeConnection,
+  modelName: 'Order',
+  timestamps: false
+});
 
 class OrderModel {
   public async findProducts(ids: string) {
@@ -8,14 +34,6 @@ class OrderModel {
                    WHERE id IN (${ids});`;
     const request = await postgresPool.query(query);
     return request.rows;
-  }
-
-  public async createUser(user) {
-    const query = `INSERT INTO users (firstname, email, phone)
-                   VALUES ('${user.name}', '${user.email}', ${user.phone})
-                   RETURNING id`;
-    const request = await postgresPool.query(query);
-    return request.rows[0];
   }
 
   public async create(products, userId) {

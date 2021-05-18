@@ -1,10 +1,10 @@
-import { IProduct, productModel } from '../models/product.model';
+import { IProduct, productModel } from './product.model';
 import { Request, Response } from 'express';
-import { ApiError } from '../errors/api-errors';
-import { BaseView } from '../views/view';
-import { ValidationObject, Validator } from '../validators/validator';
+import { ApiError } from '../../common/errors/api-errors';
+import { BaseView } from '../../common/views/view';
+import { ValidationObject, Validator } from '../../common/validators/validator';
 
-class ProductsController {
+class ProductController {
 
   public async getAll(req: Request, res: Response) {
     try {
@@ -49,4 +49,4 @@ class ProductsController {
   }
 }
 
-export const productsController = new ProductsController();
+export const productsController = new ProductController();

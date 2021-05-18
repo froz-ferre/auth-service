@@ -32,8 +32,8 @@ export class Validator {
     return null;
   }
 
-  public static validateOrder(products, user): ValidationObject {
-    if (!products || !user) {
+  public static validateOrder(products): ValidationObject {
+    if (!products) {
       return {reason: 'Incorrect data'};
     }
 
@@ -55,17 +55,17 @@ export class Validator {
       return {reason: 'Products contains invalid data'};
     }
 
-    if (!user.hasOwnProperty('name') || !user.hasOwnProperty('phone')) {
-      return {reason: 'User contains invalid data'};
-    }
-
-    if (!user.name || !user.phone) {
-      return {reason: 'User contains invalid data'};
-    }
-
-    if (/\D/.test(user.phone)) {
-      return {reason: 'User phone contains invalid data'};
-    }
+    // if (!user.hasOwnProperty('name') || !user.hasOwnProperty('phone')) {
+    //   return {reason: 'User contains invalid data'};
+    // }
+    //
+    // if (!user.name || !user.phone) {
+    //   return {reason: 'User contains invalid data'};
+    // }
+    //
+    // if (/\D/.test(user.phone)) {
+    //   return {reason: 'User phone contains invalid data'};
+    // }
 
     return null;
   }

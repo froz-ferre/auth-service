@@ -11,4 +11,8 @@ export class ApiError extends Error {
   static internal(message): ApiError {
     return new ApiError(500, message)
   }
+
+  static unauthorized(message: string): ApiError {
+    return new ApiError(401, message);
+  }
 }

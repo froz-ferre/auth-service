@@ -1,4 +1,4 @@
-import { userModel } from '../models/user.model'
+import { userModel } from './user.model'
 
 class UserController {
   async registration(req, res) {
